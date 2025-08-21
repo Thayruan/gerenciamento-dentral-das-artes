@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Image, Download, Bot, User, Loader2, RefreshCw, Settings, Plus } from 'lucide-react';
-import { createGeminiService } from '../services/geminiService';
+import { useGemini } from '../hooks/useGemini';
 
 interface Message {
   id: string;
@@ -31,8 +31,8 @@ export const GeminiChat: React.FC<GeminiChatProps> = ({ students }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
-  // Criar instância do serviço Gemini (usar API key do localStorage ou config)
-  const geminiService = createGeminiService(localStorage.getItem('geminiApiKey') || '');
+  // Usar o hook para obter a instância do serviço Gemini
+  const geminiService = useGemini();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
