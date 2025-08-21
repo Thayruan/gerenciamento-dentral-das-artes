@@ -403,3 +403,4 @@ export const ReportsSection: React.FC<ReportsSectionProps> = ({ students }) => {
     </div>
   );
 };
+

@@ -88,7 +88,7 @@ Seja criativo com a formatação, mas mantenha o conteúdo técnico e educativo.
     return basePrompt;
   }
 
-  private async callGeminiAPI(prompt: string, imageBase64?: string): Promise<any> {
+  async callGeminiAPI(prompt: string, imageBase64?: string): Promise<string> {
     try {
       const model = await this.genAI.models.generateContentStream({
         model: 'gemini-2.0-flash-exp',
@@ -122,16 +122,16 @@ Seja criativo com a formatação, mas mantenha o conteúdo técnico e educativo.
       }
       
       console.log('Resposta do Gemini recebida com sucesso');
-      return { text: () => responseText };
+      return responseText;
     } catch (error) {
       console.error('Erro na API do Gemini:', error);
       throw new Error(`Erro na API do Gemini: ${error}`);
     }
   }
 
-  private parseGeminiResponse(response: any): GeminiTaskData {
+  private parseGeminiResponse(response: string): GeminiTaskData {
     try {
-      const text = response.text();
+      const text = response;
       
       // Extrair JSON da resposta
       const jsonMatch = text.match(/\{[\s\S]*\}/);
@@ -153,7 +153,7 @@ Seja criativo com a formatação, mas mantenha o conteúdo técnico e educativo.
     }
   }
 
-  private async generateMultipleReferenceImages(title: string): Promise<string[]> {
+  async generateMultipleReferenceImages(title: string): Promise<string[]> {
     try {
       console.log('Gerando múltiplas imagens de referência para:', title);
       

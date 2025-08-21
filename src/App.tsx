@@ -20,7 +20,8 @@ import {
   Eye,
   MessageCircle,
   MapPin,
-  Zap
+  Zap,
+  Bot
 } from 'lucide-react';
 import { StudentsTable } from './components/StudentsTable';
 import { StudentDetailsModal } from './components/StudentDetailsModal';
@@ -31,6 +32,7 @@ import { WhatsAppReminder } from './components/WhatsAppReminder';
 import { FinancialSection } from './components/FinancialSection';
 
 import { ScheduleSection } from './components/ScheduleSection';
+import { GeminiChat } from './components/GeminiChat';
 import { useStudents } from './hooks/useStudents';
 import { formatCurrency } from './utils/helpers';
 import { Student } from './types';
@@ -197,6 +199,7 @@ function App() {
       'credit-card': CreditCard,
       'bar-chart-3': BarChart3,
       'settings': Settings,
+      'bot': Bot,
     };
     return iconMap[iconName] || LayoutGrid;
   };
@@ -238,6 +241,7 @@ function App() {
             { id: 'cronograma', label: 'Cronograma', icon: 'calendar' },
             { id: 'financeiro', label: 'Financeiro', icon: 'credit-card' },
             { id: 'relatorios', label: 'Relatórios', icon: 'bar-chart-3' },
+            { id: 'gemini', label: 'Gemini', icon: 'bot' },
             { id: 'config', label: 'Configurações', icon: 'settings' }
           ].map((item, index) => {
             const IconComponent = getIconComponent(item.icon);
@@ -794,6 +798,11 @@ function App() {
           {/* Reports Section */}
           {section === 'relatorios' && (
             <ReportsSection students={students} />
+          )}
+
+          {/* Gemini Section */}
+          {section === 'gemini' && (
+            <GeminiChat students={students} />
           )}
 
           {/* Settings Section */}
